@@ -1,0 +1,8 @@
+- name: Nginx var config debug
+  debug:
+      msg:
+      - "Total Ram: {{ ansible_memtotal_mb }}m"
+- name: Install and config Nginx
+  include_role:
+    role: geerlingguy.nginx
+  vars:
