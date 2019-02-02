@@ -1,0 +1,31 @@
+- name: Es var config debug
+  debug:
+      msg:
+      - "Total Ram: {{ansible_memtotal_mb}}m"
+      - "es_heap_size: {{ (ansible_memtotal_mb/2) | int }}m"
+      - "es_instance_name: {{ansible_hostname}}"
+      - "discovery.zen.ping.unicast.hosts: {{ groups['music'] | join(':9300,') + ':9300' }}"
+- name: Install and config elasticsearch
+  include_role:
+    role: elastic.elasticsearch
+  vars:
+    es_instance_name: "{{ansible_hostname}}"
+    es_heap_size: "{{ (ansible_memtotal_mb/2) | int }}m"
+    es_java_install: true
+    update_java: true
+    es_major_version: "6.x"
+    es_config:
+      cluster.name: "Cyprx-Cloud-cluster"
+      discovery.zen.ping.unicast.hosts: "{{ groups['music'] | join(':9300,') + ':9300' }}"
+      http.port: 9200
+      transport.tcp.port: 9300
+      node.data: true
+      node.master: true
+      bootstrap.memory_lock: true
+    es_version_lock: false
+    es_api_port: 9200
+    es_plugins:
+        - plugin: ingest-geoip
+        - plugin: ingest-user-agent
+    es_xpack_features:
+        - monitoring
