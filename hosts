@@ -2,6 +2,7 @@
 ansible_user=cypress
 ansible_port=2222
 become=yes
+es_ram_pct=3
 
 [music]
 music.cypress.cyprx.cloud
