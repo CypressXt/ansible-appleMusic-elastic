@@ -25,6 +25,11 @@
     rule: allow
     port: 443
     proto: tcp
+- name: Firewall | 8443 is open
+  ufw:
+    rule: allow
+    port: 8443
+    proto: tcp
 - name: Firewall | 9200 is open
   ufw:
     rule: allow
