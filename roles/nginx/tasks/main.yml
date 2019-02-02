@@ -4,6 +4,12 @@
   tags:
     - nginx
     - ssl
+- name: OpenSSL dhparams
+  become: yes
+  include: openssl.yml
+  tags:
+    - nginx
+    - ssl
 - name: Htpasswd
   become: yes
   include: htpasswd.yml
@@ -15,3 +21,4 @@
   include: nginx.yml
   tags:
     - nginx
+    - vhosts

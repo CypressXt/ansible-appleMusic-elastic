@@ -1,0 +1,8 @@
+- name: Generate Nginx dhparams
+  openssl_dhparam:
+    path: /etc/nginx/dhparams.pem
+- file:
+    path: /etc/nginx/dhparams.pem
+    owner: root
+    group: www-data
+    mode: 'u+rw,g+r'

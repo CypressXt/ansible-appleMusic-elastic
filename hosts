@@ -1,7 +1,6 @@
 [all:vars]
 ansible_user=cypress
 ansible_port=2222
-become=yes
 es_ram_pct=3
 certbot_admin_email="clement.hampai@cypressxt.net"
 
