@@ -3,18 +3,55 @@
     role: geerlingguy.nginx
   vars:
     nginx_vhosts:
-      - listen: "9201"
-        server_name: localhost
+      - listen: "80"
+        filename: "locked_kibana.conf"
+        server_name: "{{ ansible_hostname }}"
         state: "present"
-        filename: "locked_elastic.localhost.conf"
+        error_log: "/var/log/nginx/locked-kibana.error.log"
+        access_log: "/var/log/nginx/locked-kibana.access.log"
         extra_parameters: |
-          if ($request_method != GET) {
-            return 403;
-          }
+
+          # Read only access to Kibana
+          # deny other than get/post/options/head
+          # allow post when used with _search/_msearch/_mget
+          # allow get/options/head
+          set $posting 11;
+          if ( $request_method !~ ^(GET|POST|OPTIONS|HEAD)$ )                     { return 405; }
+          if ( $request_method = POST )                                           { set $posting 1; }
+          if ( $request_uri ~ ^/(.+)/(_search|_mget|_msearch|_field_stats)(.*)$ ) { set $posting "${posting}1"; }
+          if ( $request_method ~ ^(GET|OPTIONS|HEAD)$ )                           { set $posting 11; }
+          if ( $posting != 11 )                                                   { return 403; }
+
           location / {
-            proxy_set_header  X-Real-IP  $remote_addr;
-            proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header  Host $http_host;
-            proxy_pass_request_headers      on;
-            proxy_pass http://127.0.0.1:9200;
+            proxy_pass http://127.0.0.1:5601;
+            proxy_redirect off;
+            proxy_http_version 1.1;
+            add_header Access-Control-Allow-Origin *;
+            proxy_set_header X-Real-IP  $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_set_header Connection "Keep-Alive";
+            proxy_set_header Proxy-Connection "Keep-Alive";
           }
+      - listen: "8080"
+        filename: "admin_kibana.conf"
+        server_name: "{{ ansible_hostname }}"
+        state: "present"
+        error_log: "/var/log/nginx/admin-kibana.error.log"
+        access_log: "/var/log/nginx/admin-kibana.access.log"
+        extra_parameters: |
+          location / {
+              auth_basic "Kibana Admins";
+              auth_basic_user_file /etc/nginx/htpasswd-admins;
+
+              proxy_redirect off;
+              proxy_http_version 1.1;
+
+              proxy_set_header X-Real-IP  $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header Host $http_host;
+              proxy_set_header Connection "Keep-Alive";
+              proxy_set_header Proxy-Connection "Keep-Alive";
+
+              proxy_pass http://127.0.0.1:5601;
+            }

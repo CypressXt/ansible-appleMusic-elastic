@@ -1,3 +1,9 @@
+- name: Htpasswd
+  sudo : yes
+  include: htpasswd.yml
+  tags:
+    - nginx
+    - htpasswd
 - name: Nginx
   sudo : yes
   include: nginx.yml

@@ -1,0 +1,6 @@
+- name: Install and config Kibana
+  include_role:
+    role: geerlingguy.kibana
+  vars:
+    kibana_server_host: "127.0.0.1"
+    kibana_elasticsearch_url: "http://localhost:9200"

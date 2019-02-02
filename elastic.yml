@@ -2,4 +2,4 @@
   roles:
   - elasticsearch
   - nginx
-  # - kibana
+  - kibana

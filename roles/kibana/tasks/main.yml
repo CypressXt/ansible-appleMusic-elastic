@@ -1,0 +1,5 @@
+- name: Kibana
+  sudo : yes
+  include: kibana.yml
+  tags:
+    - kibana
