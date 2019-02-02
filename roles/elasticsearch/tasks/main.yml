@@ -1,2 +1,4 @@
-- name: ES
-  include: es.yml
+- name: Elasticsearch
+  include: elasticsearch.yml
+  tags:
+    - elasticsearch

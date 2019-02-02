@@ -1,2 +1,5 @@
 - name: Nginx
+  sudo : yes
   include: nginx.yml
+  tags:
+    - nginx

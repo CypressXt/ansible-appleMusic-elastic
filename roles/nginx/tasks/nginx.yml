@@ -1,8 +1,20 @@
-- name: Nginx var config debug
-  debug:
-      msg:
-      - "Total Ram: {{ ansible_memtotal_mb }}m"
 - name: Install and config Nginx
   include_role:
     role: geerlingguy.nginx
   vars:
+    nginx_vhosts:
+      - listen: "9201"
+        server_name: localhost
+        state: "present"
+        filename: "locked_elastic.localhost.conf"
+        extra_parameters: |
+          if ($request_method != GET) {
+            return 403;
+          }
+          location / {
+            proxy_set_header  X-Real-IP  $remote_addr;
+            proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header  Host $http_host;
+            proxy_pass_request_headers      on;
+            proxy_pass http://127.0.0.1:9200;
+          }
