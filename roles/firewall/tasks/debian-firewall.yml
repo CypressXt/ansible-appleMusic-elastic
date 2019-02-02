@@ -1,0 +1,32 @@
+- name: Firewall | Install ufw
+  apt:
+    name: ufw
+    state: present
+- name: Firewall | Enable ufw
+  ufw:
+    state: enabled
+    policy: allow
+- name: Firewall | Disable default in
+  ufw:
+    direction: incoming
+    policy: deny
+- name: Firewall | 2222 is open
+  ufw:
+    rule: allow
+    port: 2222
+    proto: tcp
+- name: Firewall | 80 is open
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+- name: Firewall | 443 is open
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+- name: Firewall | 9200 is open
+  ufw:
+    rule: allow
+    port: 9200
+    proto: tcp

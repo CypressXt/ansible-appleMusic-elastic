@@ -1,0 +1,16 @@
+- firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+- firewalld:
+    service: https
+    permanent: yes
+    state: enabled
+- firewalld:
+    port: 9200/tcp
+    permanent: yes
+    state: enabled
+- firewalld:
+    port: 2222/tcp
+    permanent: yes
+    state: enabled

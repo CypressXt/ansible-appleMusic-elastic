@@ -1,17 +1,17 @@
 - name: letsencrypt
-  sudo : yes
+  become: yes
   include: ssl.yml
   tags:
     - nginx
     - ssl
 - name: Htpasswd
-  sudo : yes
+  become: yes
   include: htpasswd.yml
   tags:
     - nginx
     - htpasswd
 - name: Nginx
-  sudo : yes
+  become: yes
   include: nginx.yml
   tags:
     - nginx

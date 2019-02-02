@@ -1,0 +1,13 @@
+- name: Firewall
+  become: yes
+  include: debian-firewall.yml
+  when: ansible_os_family == 'Debian'
+  tags:
+    - firewall
+
+- name: Firewall
+  become: yes
+  include: rhel-firewall.yml
+  when: ansible_os_family == 'RedHat'
+  tags:
+    - firewall
