@@ -1,3 +1,9 @@
+- name: letsencrypt
+  sudo : yes
+  include: ssl.yml
+  tags:
+    - nginx
+    - ssl
 - name: Htpasswd
   sudo : yes
   include: htpasswd.yml

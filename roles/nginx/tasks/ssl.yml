@@ -1,0 +1,16 @@
+- name: Install and config Certbot
+  include_role:
+    role: geerlingguy.certbot
+  vars:
+    certbot_auto_renew_minute: 0
+    certbot_auto_renew_hour: 0
+    certbot_keep_updated: true
+    certbot_create_if_missing: true
+    certbot_create_method: standalone
+    certbot_certs:
+      - email: "{{certbot_admin_email}}"
+        domains:
+          - music.cypress.cyprx.cloud
+    certbot_create_command: "{{ certbot_script }} certonly --standalone --noninteractive --agree-tos --email {{ cert_item.email | default(certbot_admin_email) }} -d {{ cert_item.domains | join(',') }}"
+    certbot_create_standalone_stop_services:
+      - nginx
