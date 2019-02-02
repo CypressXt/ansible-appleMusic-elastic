@@ -40,7 +40,7 @@
           set $posting 11;
           if ( $request_method !~ ^(GET|POST|OPTIONS|HEAD)$ )                     { return 405; }
           if ( $request_method = POST )                                           { set $posting 1; }
-          if ( $request_uri ~ ^/(.+)/(_search|_mget|_msearch|_field_stats)(.*)$ ) { set $posting "${posting}1"; }
+          if ( $request_uri ~ ^/(.+)/(_search|_mget|_msearch|_field_stats|_bulk_get)(.*)$ ) { set $posting "${posting}1"; }
           if ( $request_method ~ ^(GET|OPTIONS|HEAD)$ )                           { set $posting 11; }
           if ( $posting != 11 )                                                   { return 403; }
 
