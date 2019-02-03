@@ -54,8 +54,8 @@ ansible-playbook -i hosts elastic.yml --ask-sudo-pass
 
 Here is your final cheat-sheet:
 
-| Service       | URL                        | PORT | Privileges | basic-auth |
-|---------------|----------------------------|------|------------|------------|
-| Kibana        | https://yourdomain.gg      | 443  | read-only  | ❌         |
-| Kibana        | https://yourdomain.gg:8443 | 8443 | admin      | ✅        |
-| Elasticsearch | https://yourdomain.gg:9200 | 9200 | admin      | ✅        |
+| Service       | URL                            | PORT | Privileges | basic-auth |
+|---------------|--------------------------------|------|------------|------------|
+| Kibana        | https://music.mydomain.gg      | 443  | read-only  | ❌         |
+| Kibana        | https://music.mydomain.gg:8443 | 8443 | admin      | ✅         |
+| Elasticsearch | https://music.mydomain.gg:9200 | 9200 | admin      | ✅         |
