@@ -1,0 +1,10 @@
+ansible_user: ansible
+ansible_port: 2222
+# total system ram % allocated to Elasticsearch (3 = 30%)
+es_ram_pct: 3
+certbot_admin_email: "me@mydomain.gg"
+basic_admin_username: admin
+basic_admin_password: PeEFWd4QswFB
+# Final url used to expose Kibana & Elasticsearch.
+#   Also used by Let's encrypt cert
+music_endpoint: music.mydomain.gg
