@@ -10,10 +10,10 @@
   ufw:
     direction: incoming
     policy: deny
-- name: Firewall | 2222 is open
+- name: Firewall | "{{ansible_port}}" is open
   ufw:
     rule: allow
-    port: 2222
+    port: "{{ansible_port}}"
     proto: tcp
 - name: Firewall | 80 is open
   ufw:
