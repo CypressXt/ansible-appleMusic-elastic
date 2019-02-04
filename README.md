@@ -47,7 +47,7 @@ Configure the [hosts file](hosts) with the proper hosts.
 ##### 3-2-1 Ignition
 
 ```bash
-ansible-playbook -i hosts elastic.yml --ask-sudo-pass
+ansible-playbook -i hosts elastic.yml --ask-become-pass
 ```
 
 ## Ansible reporting for duty
