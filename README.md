@@ -7,7 +7,7 @@ What is this ansible repo for ?
 This ansible repo aim to configure an Elastic stack ready to host your [AppleMusic played history](https://github.com/CypressXt/AppleMusic-Elastic). You'll also be able to share it (read-only) publicly if you want to.
 
 At the end you'll get:
- * An Elasticsearch server (admin only)
+ * An Elasticsearch server (admin and read-only)
  * A Kibana web app (admin and read-only)
  * An Nginx with HTTP2 support and an [SSL grade of A](https://www.ssllabs.com/ssltest/analyze.html?d=music.cypress.cyprx.cloud)
  * A restrictive firewall configuration
@@ -58,4 +58,5 @@ Here is your final cheat-sheet:
 |---------------|--------------------------------|------|------------|------------|
 | Kibana        | https://music.mydomain.gg      | 443  | read-only  | ❌         |
 | Kibana        | https://music.mydomain.gg:8443 | 8443 | admin      | ✅         |
-| Elasticsearch | https://music.mydomain.gg:9200 | 9200 | admin      | ✅         |
+| Elasticsearch | https://music.mydomain.gg:9200 | 9200 | read-only  | ❌         |
+| Elasticsearch | https://music.mydomain.gg:9203 | 9203 | admin      | ✅         |

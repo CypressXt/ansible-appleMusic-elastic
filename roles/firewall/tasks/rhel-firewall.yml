@@ -15,6 +15,10 @@
     permanent: yes
     state: enabled
 - firewalld:
+    port: 9203/tcp
+    permanent: yes
+    state: enabled
+- firewalld:
     port: "{{ansible_port}}/tcp"
     permanent: yes
     state: enabled

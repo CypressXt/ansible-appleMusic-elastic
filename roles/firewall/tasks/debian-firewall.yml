@@ -35,3 +35,8 @@
     rule: allow
     port: 9200
     proto: tcp
+- name: Firewall | 9203 is open
+  ufw:
+    rule: allow
+    port: 9203
+    proto: tcp
